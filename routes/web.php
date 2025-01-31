@@ -14,4 +14,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/onboarding', \App\Livewire\Pages\Onboarding::class)->name('onboarding');
 });

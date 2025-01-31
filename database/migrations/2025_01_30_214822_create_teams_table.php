@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index();
+            $table->bigInteger('sage_id')->nullable();
+            $table->boolean('skipped_onboarding')->default(false);
             $table->string('name');
             $table->boolean('personal_team');
             $table->timestamps();

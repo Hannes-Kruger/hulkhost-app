@@ -9,32 +9,31 @@
             <flux:subheading>{{ __('Start saving on your AWS bill today.') }}</flux:subheading>
         </div>
 
-        <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>
-                <flux:input id="name" label="{{ __('Name') }}" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <flux:input id="name" label="{{ __('Name') }}" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email" :value="old('email')" autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password" required autocomplete="new-password" />
+                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password" autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password" name="password_confirmation" autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
                         <div class="flex items-center">
-                            <flux:checkbox name="terms" id="terms" required />
+                            <flux:checkbox name="terms" id="terms" />
 
                             <div class="ms-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
