@@ -92,6 +92,12 @@ class Onboard extends Component
             'sage_id' => $response['ID'],
         ]);
 
+        $team = auth()->user()->currentTeam;
+
+        $team->forceFill([
+            'name' => $this->companyName,
+        ])->save();
+
         $this->redirectRoute('dashboard');
     }
 

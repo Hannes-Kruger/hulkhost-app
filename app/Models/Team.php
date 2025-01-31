@@ -49,6 +49,35 @@ class Team extends JetstreamTeam
     }
 
     /**
+     * Boot the model and add event listeners.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+
+            if (empty($model->account_ref)) {
+                $model->account_ref = $model->generateUniqueAccountRef();
+            }
+        });
+    }
+
+    /**
+     * Generate a unique account reference string.
+     */
+    private function generateUniqueAccountRef(): string
+    {
+        do {
+            $prefix = strtoupper(substr($this->name ?? 'ACCOUNT', 0, 3));
+            $suffix = str_pad(mt_rand(1, 999), 4, '0', STR_PAD_LEFT);
+            $accountRef = "{$prefix}-{$suffix}";
+        } while (self::where('account_ref', $accountRef)->exists());
+
+        return $accountRef;
+    }
+
+    /**
      * Get all of the team's aws accounts.
      */
     public function awsAccounts(): HasMany

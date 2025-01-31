@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('sage_id')->nullable();
             $table->boolean('skipped_onboarding')->default(false);
             $table->string('name');
+            $table->string('account_ref')->nullable();
             $table->boolean('personal_team');
             $table->timestamps();
         });

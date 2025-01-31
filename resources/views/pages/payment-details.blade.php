@@ -2,23 +2,31 @@
 
     <x-form-section submit="saveChanges">
         <x-slot name="title">
-            {{ __('Complete Your Profile') }}
+            {{ __('Payment Instructions') }}
         </x-slot>
 
         <x-slot name="description">
-            {{ __('Please complete your profile setup to access all features.') }}
+            {{ __('We currently only accept EFT payments. Please ensure you use the payment reference provided for all payments.') }}
         </x-slot>
 
         <x-slot name="form">
+            <div class="col-span-6 sm:col-span-4">
+                <flux:input label="{{ __('Payment Reference') }}"
+                            description="{{ __('Always use this reference when making a payment') }}" copyable readonly
+                            value="{{ $reference }}"/>
+            </div>
 
-
+            <div class="col-span-6 sm:col-span-4">
+                <flux:textarea label="Banking Details" rows="auto" readonly resize="none">
+                    {{ $paymentInfo }}
+                </flux:textarea>
+            </div>
         </x-slot>
 
         <x-slot name="actions">
-            <x-button type="submit">
-                {{ __('Create') }}
+            <x-button>
+                {{ __('Download Proof of Account') }}
             </x-button>
         </x-slot>
     </x-form-section>
-
 </div>

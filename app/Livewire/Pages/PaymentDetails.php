@@ -27,7 +27,7 @@ class PaymentDetails extends Component
     {
         $docType = 2;
 
-        $message = Cache::remember('payment-info', 60, function () use ($docType) {
+        $message = Cache::remember('payment-info', 600, function () use ($docType) {
             return collect(Http::sage()
                 ->get('DocumentMessage/Get')
                 ->throw()
@@ -38,7 +38,7 @@ class PaymentDetails extends Component
 
         $this->paymentInfo = Arr::get($message, 'Message');
 
-        $this->reference = auth()->user()->id;
+        $this->reference = auth()->user()->currentTeam->account_ref;
 
     }
 }
