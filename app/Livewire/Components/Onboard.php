@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use App\Rules\SouthAfricanVatNumber;
 use App\Rules\UniqueCompanyName;
+use App\Services\SageOne;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -24,7 +25,9 @@ class Onboard extends Component
 
     public function mount()
     {
-        $this->emails = [];
+        $this->emails = [
+            auth()->user()->email,
+        ];
 
         $this->setComputedProp();
     }
@@ -74,9 +77,22 @@ class Onboard extends Component
             'Email' => collect($this->emails)->implode(','),
             'TaxReference' => $this->vatNumber,
             'Name' => $this->companyName,
+            'PostalAddress05' => 'South Africa',
+            'CommunicationMethod' => 1,
+            'Active' => true,
+            'AutoAllocateToOldestInvoice' => true,
+            'EnableCustomerZone' => false,
         ];
 
-        dd($data);
+        $sage = new SageOne;
+
+        $response = $sage->createCustomer($data);
+
+        auth()->user()->currentTeam()->update([
+            'sage_id' => $response['ID'],
+        ]);
+
+        $this->redirectRoute('dashboard');
     }
 
     public function render()

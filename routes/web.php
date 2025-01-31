@@ -17,4 +17,6 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/onboarding', \App\Livewire\Pages\Onboarding::class)->name('onboarding');
+
+    Route::get('/invoices', \App\Livewire\Pages\Invoices::class)->name('invoices');
 });
