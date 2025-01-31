@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'sageone' => [
+        'base_url' => env('SAGEONE_BASE_URL', 'https://accounting.sageone.co.za'),
+        'version' => env('SAGEONE_VERSION', '2.0.0'),
+        'api_key' => env('SAGEONE_API_KEY'),
+        'username' => env('SAGEONE_USERNAME'),
+        'password' => env('SAGEONE_PASSWORD'),
+        'company_id' => env('SAGE_COMPANY_ID'),
+    ],
+
 ];
