@@ -20,4 +20,7 @@ Route::middleware([
 
     Route::get('/invoices', \App\Livewire\Pages\Invoices::class)->name('invoices');
     Route::get('/payment-details', \App\Livewire\Pages\PaymentDetails::class)->name('payment-details');
+
+    Route::get('/aws-accounts', \App\Livewire\Pages\AwsAccounts::class)->name('aws-accounts');
+
 });

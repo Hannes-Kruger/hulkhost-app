@@ -16,8 +16,8 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('invoices') }}" :active="request()->routeIs('invoices')" wire:navigate>
-                        {{ __('Invoices') }}
+                    <x-nav-link href="{{ route('aws-accounts') }}" :active="request()->routeIs('aws-accounts')" wire:navigate>
+                        {{ __('AWS Accounts') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -41,17 +41,27 @@
                                 <div class="w-60">
                                     <!-- Team Management -->
                                     <div class="block px-2 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Team') }}
+                                        {{ __('Manage Organisation') }}
                                     </div>
+                                    <!-- Invoices -->
+                                    <x-dropdown-link href="{{ route('invoices') }}">
+                                        {{ __('Invoices') }}
+                                    </x-dropdown-link>
+                                    <!-- Invoices -->
+                                    <x-dropdown-link href="{{ route('payment-details') }}">
+                                        {{ __('Payments') }}
+                                    </x-dropdown-link>
 
                                     <!-- Team Settings -->
                                     <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                        {{ __('Team Settings') }}
+                                        {{ __('Settings') }}
                                     </x-dropdown-link>
+
+
 
                                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                         <x-dropdown-link href="{{ route('teams.create') }}">
-                                            {{ __('Create New Team') }}
+                                            {{ __('Create New') }}
                                         </x-dropdown-link>
                                     @endcan
 
