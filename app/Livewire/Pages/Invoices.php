@@ -2,7 +2,11 @@
 
 namespace App\Livewire\Pages;
 
+use App\Services\SageOne;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,16 +14,48 @@ class Invoices extends Component
 {
     use WithPagination;
 
-    public $sortBy = 'name';
+    #[Url]
+    public $sortBy = 'DocumentNumber';
 
-    public $sortDirection = 'desc';
+    #[Url]
+    public $sortDirection = 'asc';
+
+    public string $total = '';
 
     #[Computed]
     public function invoices()
     {
-        return \App\Models\User::query()
-            ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query)
-            ->paginate(5);
+        $sage = new SageOne;
+
+        $invoices = $sage->getInvoices();
+
+        $invoices->transform(function ($invoice) {
+            $invoice['DueDate'] = Carbon::parse($invoice['DueDate']);
+            $invoice['Created'] = Carbon::parse($invoice['Created']);
+
+            $invoice['BadgeColor'] = $invoice['Status'] === 'Paid' ? 'green' : ($invoice['Status'] === 'Overdue' ? 'red' : 'yellow');
+
+            return $invoice;
+        });
+
+        $balance = Arr::get($invoices->first(), 'Customer.Balance');
+
+        if ($balance) {
+            $this->total = number_format($balance, 2);
+        }
+
+        return $invoices->sortBy($this->sortBy, SORT_REGULAR, $this->sortDirection === 'desc');
+
+    }
+
+    #[Computed]
+    public function total()
+    {
+        $sage = new SageOne;
+
+        $customer = $sage->getCustomer();
+
+        // dd($customer);
     }
 
     public function sort($column)
@@ -30,6 +66,17 @@ class Invoices extends Component
             $this->sortBy = $column;
             $this->sortDirection = 'asc';
         }
+    }
+
+    public function downloadInvoice($id, $documentNumber = 1)
+    {
+        $sage = new SageOne;
+
+        $pdf = $sage->downloadInvoice($id);
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf;
+        }, 'Invoice-'.$documentNumber.'.pdf');
     }
 
     public function render()

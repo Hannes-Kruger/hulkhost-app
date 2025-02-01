@@ -16,7 +16,8 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('aws-accounts') }}" :active="request()->routeIs('aws-accounts')" wire:navigate>
+                    <x-nav-link href="{{ route('aws-accounts') }}" :active="request()->routeIs('aws-accounts')"
+                                wire:navigate>
                         {{ __('AWS Accounts') }}
                     </x-nav-link>
                 </div>
@@ -28,63 +29,46 @@
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">
-                        <x-dropdown align="right" width="60" content-classes="w-fit">
-                            <x-slot name="trigger">
-                                <span class="inline-flex rounded-md">
-                                    <flux:button variant="subtle" icon-trailing="chevron-up-down">
-                                        {{ Auth::user()->currentTeam->name }}
-                                    </flux:button>
-                                </span>
-                            </x-slot>
-
-                            <x-slot name="content">
-                                <div class="w-60">
-                                    <!-- Team Management -->
-                                    <div class="block px-2 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Organisation') }}
-                                    </div>
-                                    <!-- Invoices -->
-                                    <x-dropdown-link href="{{ route('invoices') }}">
-                                        {{ __('Invoices') }}
-                                    </x-dropdown-link>
-                                    <!-- Invoices -->
-                                    <x-dropdown-link href="{{ route('payment-details') }}">
-                                        {{ __('Payments') }}
-                                    </x-dropdown-link>
-
-                                    <!-- Team Settings -->
-                                    <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                        {{ __('Settings') }}
-                                    </x-dropdown-link>
-
-
-
-                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                        <x-dropdown-link href="{{ route('teams.create') }}">
-                                            {{ __('Create New') }}
-                                        </x-dropdown-link>
-                                    @endcan
-
-                                    <!-- Team Switcher -->
-                                    @if (Auth::user()->allTeams()->count() > 1)
-                                        <flux:separator class="my-1"/>
-
-                                        <div class="block px-2 py-2 text-xs text-gray-400">
-                                            {{ __('Switch Teams') }}
-                                        </div>
-
-                                        @foreach (Auth::user()->allTeams() as $team)
-                                            <x-switchable-team :team="$team"/>
-                                        @endforeach
-                                    @endif
+                        <flux:dropdown x-data align="end">
+                            <flux:button variant="subtle" icon-trailing="chevron-up-down"
+                                         aria-label="Preferred color scheme">
+                                {{ Auth::user()->currentTeam->name }}
+                            </flux:button>
+                            <flux:menu>
+                                <!-- Account Management -->
+                                <div class="block px-2 py-2 text-xs text-gray-400">
+                                    {{ auth()->user()->currentTeam->name }}
                                 </div>
-                            </x-slot>
-                        </x-dropdown>
+                                <flux:menu.item icon="cog"
+                                                href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
+                                                wire:navigate>{{ __('Settings') }}</flux:menu.item>
+                                <flux:menu.item icon="document-currency-dollar" href="{{ route('invoices') }}"
+                                                wire:navigate>{{ __('Invoices') }}</flux:menu.item>
+                                <flux:menu.item icon="banknotes" href="{{ route('payment-details') }}"
+                                                wire:navigate>{{ __('Payments') }}</flux:menu.item>
+
+                                {{--                                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())--}}
+                                {{--                                    <flux:menu.item icon="plus" href="{{ route('teams.create') }}"--}}
+                                {{--                                                    wire:navigate>{{ __('Create New') }}</flux:menu.item>--}}
+                                {{--                                @endcan--}}
+                                @if (Auth::user()->allTeams()->count() > 1)
+                                    <flux:separator class="my-1 mt-2"/>
+                                    <div class="block px-2 py-2 text-xs text-gray-400">
+                                        {{ __('Switch Organisation') }}
+                                    </div>
+                                    @foreach (Auth::user()->allTeams() as $team)
+                                        <x-switchable-team component="team-link" :team="$team"/>
+                                    @endforeach
+                                @endif
+                            </flux:menu>
+                        </flux:dropdown>
+
+
                     </div>
                 @endif
 
-                <flux:separator vertical class="my-4 mx-3" />
-                <flux:dropdown x-data align="end" >
+                <flux:separator vertical class="my-4 mx-3"/>
+                <flux:dropdown x-data align="end">
                     <flux:button variant="subtle" square class="group" aria-label="Preferred color scheme">
                         <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini"
                                        class="text-zinc-500 dark:text-white"/>
@@ -103,48 +87,33 @@
                 </flux:dropdown>
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <flux:profile avatar="{{ Auth::user()->profile_photo_url }}"/>
-                        </x-slot>
 
-                        <x-slot name="content">
-                            <!-- Account Management -->
+                    <flux:dropdown x-data align="end">
+                        <flux:profile avatar="{{ Auth::user()->profile_photo_url }}"/>
+                        <flux:menu>
                             <div class="block px-2 pt-2 text-xs text-gray-400">
                                 {{ __('Signed in as') }}
                             </div>
 
                             <flux:subheading class="truncate px-2">{{ Auth::user()->email }}</flux:subheading>
                             <flux:separator class="my-1 mt-2"/>
-
                             <!-- Account Management -->
                             <div class="block px-2 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
-
-                            <x-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
-
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
-                            @endif
-
+                            <flux:menu.item icon="user" href="{{ route('profile.show') }}"
+                                            wire:navigate>{{ __('Profile') }}</flux:menu.item>
                             <flux:separator class="my-1"/>
-
-                            <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                                 @click.prevent="$root.submit();">
+                                <flux:menu.item icon="arrow-right-end-on-rectangle" href="{{ route('logout') }}"
+                                                 @click.prevent="$root.submit();" wire:navigate>
                                     {{ __('Log Out') }}
-                                </x-dropdown-link>
+                                </flux:menu.item>
                             </form>
-                        </x-slot>
-                    </x-dropdown>
+                        </flux:menu>
+                    </flux:dropdown>
                 </div>
             </div>
 
