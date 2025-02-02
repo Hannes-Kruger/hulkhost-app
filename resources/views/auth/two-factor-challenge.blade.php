@@ -18,27 +18,26 @@
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">
-                    <flux:input id="code" label="{{ __('Code') }}" type="text" inputmode="numeric" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
+                    <flux:input id="code" label="{{ __('Code') }}" type="text" inputmode="numeric"
+                        name="code" autofocus x-ref="code" autocomplete="one-time-code" />
                 </div>
 
                 <div class="mt-4" x-cloak x-show="recovery">
-                    <flux:input id="recovery_code" label="{{ __('Recovery Code') }}" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
+                    <flux:input id="recovery_code" label="{{ __('Recovery Code') }}" class="block mt-1 w-full"
+                        type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <flux:button variant="ghost"
-                                    x-show="! recovery"
-                                    x-on:click="
+                    <flux:button variant="ghost" x-show="! recovery"
+                        x-on:click="
                                         recovery = true;
                                         $nextTick(() => { $refs.recovery_code.focus() })
                                     ">
                         {{ __('Use a recovery code') }}
                     </flux:button>
 
-                    <flux:button variant="ghost"
-                                    x-cloak
-                                    x-show="recovery"
-                                    x-on:click="
+                    <flux:button variant="ghost" x-cloak x-show="recovery"
+                        x-on:click="
                                         recovery = false;
                                         $nextTick(() => { $refs.code.focus() })
                                     ">

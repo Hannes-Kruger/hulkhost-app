@@ -12,7 +12,8 @@
             <x-label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
-                <img class="size-12 rounded-full object-cover" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}">
+                <img class="size-12 rounded-full object-cover" src="{{ $this->user->profile_photo_url }}"
+                    alt="{{ $this->user->name }}">
 
                 <div class="ms-4 leading-tight">
                     <div class="text-gray-900 dark:text-white">{{ $this->user->name }}</div>
@@ -22,7 +23,8 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-input id="name" name="name" label="{{ __('Team Name') }}" type="text" class="mt-1 block w-full" wire:model="state.name" autofocus />
+            <x-input id="name" name="name" label="{{ __('Team Name') }}" type="text"
+                class="mt-1 block w-full" wire:model="state.name" autofocus />
         </div>
     </x-slot>
 

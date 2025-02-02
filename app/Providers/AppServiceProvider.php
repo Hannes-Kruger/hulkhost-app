@@ -32,5 +32,18 @@ class AppServiceProvider extends ServiceProvider
                     ],
                 ]);
         });
+
+        Http::macro('pump', function () {
+            return Http::baseUrl(config('services.pump.base_url'))
+                ->withOptions([
+                    'query' => [
+                        'company_id' => config('services.pump.company_id'),
+                    ],
+                ])
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ]);
+        });
     }
 }

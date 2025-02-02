@@ -10,13 +10,11 @@
     <x-slot name="form">
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+            <div x-data="{ photoName: null, photoPreview: null }" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden"
-                            label="{{ __('Photo') }}"
-                            wire:model.live="photo"
-                            x-ref="photo"
-                            x-on:change="
+                <input type="file" id="photo" class="hidden" label="{{ __('Photo') }}" wire:model.live="photo"
+                    x-ref="photo"
+                    x-on:change="
                                     photoName = $refs.photo.files[0].name;
                                     const reader = new FileReader();
                                     reader.onload = (e) => {
@@ -28,13 +26,14 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full size-20 object-cover">
+                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
+                        class="rounded-full size-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" x-show="photoPreview" style="display: none;">
                     <span class="block rounded-full size-20 bg-cover bg-no-repeat bg-center"
-                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                        x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>
                 </div>
 
@@ -54,21 +53,25 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-input id="name" label="{{ __('Name') }}" type="text" wire:model="state.name" required autocomplete="name" />
+            <x-input id="name" label="{{ __('Name') }}" type="text" wire:model="state.name" required
+                autocomplete="name" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-input id="email" label="{{ __('Email') }}" type="email" wire:model="state.email" required autocomplete="username" />
+            <x-input id="email" label="{{ __('Email') }}" type="email" wire:model="state.email" required
+                autocomplete="username" />
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
+            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) &&
+                    !$this->user->hasVerifiedEmail())
                 <p class="text-sm mt-2 dark:text-white">
                     <flux:subheading>
                         {{ __('Your email address is unverified.') }}
                     </flux:subheading>
 
 
-                    <flux:button variant="ghost" class="-mx-3 my-1" size="sm" wire:click.prevent="sendEmailVerification">
+                    <flux:button variant="ghost" class="-mx-3 my-1" size="sm"
+                        wire:click.prevent="sendEmailVerification">
                         {{ __('Click here to re-send the verification email.') }}
                     </flux:button>
                 </p>

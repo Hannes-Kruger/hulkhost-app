@@ -14,19 +14,23 @@
             @csrf
 
             <div>
-                <flux:input id="name" label="{{ __('Name') }}" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
+                <flux:input id="name" label="{{ __('Name') }}" type="text" name="name" :value="old('name')"
+                    autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email" :value="old('email')" autocomplete="username" />
+                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email"
+                    :value="old('email')" autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password" autocomplete="new-password" />
+                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password"
+                    autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password" name="password_confirmation" autocomplete="new-password" />
+                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password"
+                    name="password_confirmation" autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -37,8 +41,18 @@
 
                             <div class="ms-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">'.__('Privacy Policy').'</a>',
+                                    'terms_of_service' =>
+                                        '<a target="_blank" href="' .
+                                        route('terms.show') .
+                                        '" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">' .
+                                        __('Terms of Service') .
+                                        '</a>',
+                                    'privacy_policy' =>
+                                        '<a target="_blank" href="' .
+                                        route('policy.show') .
+                                        '" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">' .
+                                        __('Privacy Policy') .
+                                        '</a>',
                                 ]) !!}
                             </div>
                         </div>
@@ -47,7 +61,8 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
+                    href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 

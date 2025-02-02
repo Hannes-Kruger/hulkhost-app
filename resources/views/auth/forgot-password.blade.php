@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo/>
+            <x-authentication-card-logo />
         </x-slot>
 
         <div>
@@ -12,17 +12,17 @@
         </div>
 
         @session('status')
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ $value }}
-        </div>
+            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                {{ $value }}
+            </div>
         @endsession
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <div class="block">
-                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email"
-                            :value="old('email')" autofocus autocomplete="username"/>
+                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email" :value="old('email')"
+                    autofocus autocomplete="username" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

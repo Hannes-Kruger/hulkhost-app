@@ -12,8 +12,8 @@
         <x-slot name="form">
             <div class="col-span-6 sm:col-span-4">
                 <flux:input label="{{ __('Payment Reference') }}"
-                            description="{{ __('Always use this reference when making a payment') }}" copyable readonly
-                            value="{{ $reference }}"/>
+                    description="{{ __('Always use this reference when making a payment') }}" copyable readonly
+                    value="{{ $reference }}" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">

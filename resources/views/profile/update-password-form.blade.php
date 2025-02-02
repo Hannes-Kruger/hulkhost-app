@@ -9,15 +9,18 @@
 
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4">
-            <flux:input id="current_password" name="current_password" label="{{ __('Current Password') }}" type="password" wire:model="state.current_password" autocomplete="current-password" />
+            <flux:input id="current_password" name="current_password" label="{{ __('Current Password') }}" type="password"
+                wire:model="state.current_password" autocomplete="current-password" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <flux:input id="password" name="password" label="{{ __('New Password') }}" type="password" wire:model="state.password" autocomplete="new-password" />
+            <flux:input id="password" name="password" label="{{ __('New Password') }}" type="password"
+                wire:model="state.password" autocomplete="new-password" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <flux:input id="password_confirmation" name="password_confirmation" label="{{ __('Confirm Password') }}" type="password" wire:model="state.password_confirmation" autocomplete="new-password" />
+            <flux:input id="password_confirmation" name="password_confirmation" label="{{ __('Confirm Password') }}"
+                type="password" wire:model="state.password_confirmation" autocomplete="new-password" />
         </div>
     </x-slot>
 

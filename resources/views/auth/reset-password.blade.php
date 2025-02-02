@@ -19,15 +19,18 @@
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             <div class="block">
-                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+                <flux:input id="email" label="{{ __('Email') }}" type="email" name="email"
+                    :value="old('email', $request - > email)" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password" required autocomplete="new-password" />
+                <flux:input id="password" label="{{ __('Password') }}" type="password" name="password" required
+                    autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <flux:input id="password_confirmation" label="{{ __('Confirm Password') }}" type="password"
+                    name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

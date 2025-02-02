@@ -13,7 +13,7 @@
                     <flux:option>Other</flux:option>
                 </flux:select>
 
-                <flux:button size="sm" class="w-1/2 sm:w-auto">Jan 02, 2025 - Feb 02, 2025</flux:button>
+                <flux:button size="sm" class="w-1/2 sm:w-auto">{{ $this->startDate->format('M d, Y') }} - {{ $this->endDate->format('M d, Y') }}</flux:button>
             </div>
 
             <!-- Button Group D/W/M -->
@@ -46,7 +46,7 @@
         <div class="space-y-6 md:col-span-4">
             <flux:card class="space-y-2">
                 <flux:heading size="lg" level="2">Savings Achieved</flux::heading>
-                    <flux:heading size="xl" level="3">$ 0.00</flux::heading>
+                <flux:heading size="xl" level="3">$ 0.00</flux::heading>
             </flux:card>
             <flux:card class="space-y-3 text-sm">
                 <div class="flex items-center justify-between">

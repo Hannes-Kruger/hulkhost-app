@@ -1,12 +1,14 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo/>
+            <x-authentication-card-logo />
         </x-slot>
 
         <div>
             <flux:heading size="lg">{{ __('Verify your email') }}</flux:heading>
-            <flux:subheading>{{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}</flux:subheading>
+            <flux:subheading>
+                {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            </flux:subheading>
         </div>
 
         @if (session('status') == 'verification-link-sent')
@@ -28,8 +30,8 @@
 
             <div>
 
-                <flux:button wire:navigate variant="ghost"
-                             href="{{ route('profile.show') }}">{{ __('Edit Profile') }}</flux:button>
+                <flux:button wire:navigate variant="ghost" href="{{ route('profile.show') }}">{{ __('Edit Profile') }}
+                </flux:button>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
 

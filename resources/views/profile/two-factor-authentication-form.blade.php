@@ -9,7 +9,7 @@
 
     <x-slot name="content">
 
-            <flux:heading size="lg" level="3">
+        <flux:heading size="lg" level="3">
             @if ($this->enabled)
                 @if ($showingConfirmation)
                     {{ __('Finish enabling two factor authentication.') }}
@@ -19,11 +19,11 @@
             @else
                 {{ __('You have not enabled two factor authentication.') }}
             @endif
-            </flux:heading>
+        </flux:heading>
 
-<flux:subheading>
-    {{ __('When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.') }}
-</flux:subheading>
+        <flux:subheading>
+            {{ __('When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.') }}
+        </flux:subheading>
 
 
         @if ($this->enabled)
@@ -51,22 +51,23 @@
                 @if ($showingConfirmation)
                     <div class="mt-4">
 
-                        <flux:input id="code" type="text" name="code" label="{{ __('Code') }}" class="block max-w-[50%]" inputmode="numeric" autofocus autocomplete="one-time-code"
-                            wire:model="code"
-                            wire:keydown.enter="confirmTwoFactorAuthentication" />
+                        <flux:input id="code" type="text" name="code" label="{{ __('Code') }}"
+                            class="block max-w-[50%]" inputmode="numeric" autofocus autocomplete="one-time-code"
+                            wire:model="code" wire:keydown.enter="confirmTwoFactorAuthentication" />
 
                     </div>
                 @endif
             @endif
 
             @if ($showingRecoveryCodes)
-                    <flux:subheading class="mt-4">
+                <flux:subheading class="mt-4">
                     <p class="font-semibold">
                         {{ __('Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.') }}
                     </p>
                 </flux:subheading>
 
-                <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-black/30 dark:text-gray-100 rounded-lg">
+                <div
+                    class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 dark:bg-black/30 dark:text-gray-100 rounded-lg">
                     @foreach (json_decode(decrypt($this->user->two_factor_recovery_codes), true) as $code)
                         <div>{{ $code }}</div>
                     @endforeach
@@ -75,7 +76,7 @@
         @endif
 
         <div class="mt-5">
-            @if (! $this->enabled)
+            @if (!$this->enabled)
                 <x-confirms-password wire:then="enableTwoFactorAuthentication">
                     <flux:button variant="primary">
                         {{ __('Enable') }}

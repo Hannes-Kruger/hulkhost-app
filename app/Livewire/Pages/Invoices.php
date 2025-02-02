@@ -48,16 +48,6 @@ class Invoices extends Component
 
     }
 
-    #[Computed]
-    public function total()
-    {
-        $sage = new SageOne;
-
-        $customer = $sage->getCustomer();
-
-        // dd($customer);
-    }
-
     public function sort($column)
     {
         if ($this->sortBy === $column) {
@@ -68,11 +58,13 @@ class Invoices extends Component
         }
     }
 
-    public function downloadInvoice($id, $documentNumber = 1)
+    public function downloadInvoice($id)
     {
         $sage = new SageOne;
 
         $pdf = $sage->downloadInvoice($id);
+
+        $documentNumber = $this->invoices->firstWhere('ID', $id)['DocumentNumber'];
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf;

@@ -27,7 +27,7 @@ class PaymentDetails extends Component
     {
         $docType = 2;
 
-        $message = Cache::remember('payment-info', 600, function () use ($docType) {
+        $message = Cache::remember('payment-info', now()->addMonth(), function () use ($docType) {
             return collect(Http::sage()
                 ->get('DocumentMessage/Get')
                 ->throw()

@@ -44,4 +44,9 @@ return [
         'company_id' => env('SAGE_COMPANY_ID'),
     ],
 
+    'pump' => [
+        'base_url' => env('PUMP_BASE_URL', 'https://api.pump.co/api/v1/'),
+        'company_id' => env('PUMP_COMPANY_ID'),
+    ],
+
 ];

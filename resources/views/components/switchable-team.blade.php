@@ -7,8 +7,7 @@
     <!-- Hidden Team ID -->
     <input type="hidden" name="team_id" value="{{ $team->id }}">
 
-    <x-dynamic-component :component="$component" href="#" x-on:click.prevent="$root.submit();"
-                         :checked="Auth::user()->isCurrentTeam($team)">
+    <x-dynamic-component :component="$component" href="#" x-on:click.prevent="$root.submit();" :checked="Auth::user()->isCurrentTeam($team)">
         {{ $team->name }}
     </x-dynamic-component>
 </form>
