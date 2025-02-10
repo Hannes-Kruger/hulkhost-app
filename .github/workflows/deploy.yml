@@ -22,6 +22,8 @@ jobs:
           php-version: 8.2
           tools: composer:v2
           coverage: none
+      - name: Flux UI Auth
+        run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
       - name: Install Project Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
       - name: Create SQLite Database
@@ -45,6 +47,8 @@ jobs:
           coverage: none
       - name: Require Vapor CLI
         run: composer global require laravel/vapor-cli
+      - name: Flux UI Auth
+        run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
       - name: Install Project Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
       - name: Install NPM Dependencies
