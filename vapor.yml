@@ -7,6 +7,9 @@ environments:
         queue-memory: 512
         runtime: 'php-8.3:al2-arm'
         database: bulkhost
+        domain:
+            - '*.hulkhost.co.za'
+            - hulkhost.co.za
         octane: true
         octane-database-session-persist: true
         octane-database-session-ttl: 10
