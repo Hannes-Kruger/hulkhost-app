@@ -1,0 +1,16 @@
+id: 69494
+name: bulkhost
+environments:
+    production:
+        memory: 512
+        cli-memory: 512
+        queue-memory: 512
+        runtime: 'php-8.3:al2-arm'
+        database: bulkhost
+        octane: true
+        octane-database-session-persist: true
+        octane-database-session-ttl: 10
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'npm ci && npm run build && rm -rf node_modules'

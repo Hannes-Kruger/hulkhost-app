@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class Pump
@@ -13,14 +14,14 @@ class Pump
         $this->client = Http::pump();
     }
 
-    public function getCostReport()
+    public function getCostReport(Carbon $startDate, Carbon $endDate)
     {
 
         return $this->client
             ->withOptions([
                 'query' => [
-                    'start_date' => '2025-01-01',
-                    'end_date' => '2025-01-31',
+                    'start_date' => $startDate->format('Y-m-d'),
+                    'end_date' => $endDate->format('Y-m-d'),
                     'group_by' => 'PUMP_SAVINGS',
                     'account_id' => '',
                 ],
